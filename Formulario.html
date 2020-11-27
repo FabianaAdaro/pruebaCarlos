@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-4.5.0-dist/css/bootstrap.css">
+    <title>Formulario</title>
+</head>
+
+    <body style="background-color:rgb(176, 230, 227);" >
+        <div class="container-fluid bg-info py-s">
+            <div class="container text-white">
+                <h1>
+                    
+                    <div class="display-4">
+                       
+                         Inmobiliaria Moreno & Ruiz
+                     </div>
+                 </h1> 
+                  <p class="text-warning"> Martillero Público mp 5678</p>
+              </div>
+          </div>
+          <div class="span12" style="border: 2px solid black"></div>
+          <div class="cointainer">
+            <div class="row">
+      
+              <div class="col-3"></div>
+                 <div class="col-6">
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="divAlerta">
+                      Algo de alerta
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="btnCerrar" onclick="cerrarAlerta()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert" id="divMostrarDatosCargados">
+                       <div class="mostrar datos ingresados" >
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="btnCerrar" onclick="cerrarMostrarDatosCargados()">
+                           <span aria-hidden="true">&times;</span>
+                          </button>
+                       </div>
+                     </div>
+                    <form>
+                        <div class="form-group">                                                       
+                            <label>Nombre : </label>
+                            <input type="text" class="form-control form-control-sm"  id="txtNombre"   >
+                         </div>
+                        <div class="form-group">
+                            <label>Telefono: </label><br>
+                            <input class="form-control form-control-sm" type="text" id="txtTelefono" />
+                        </div>
+                                                                             
+                                                   
+                         
+                          <div class="form-group">
+                              <label>Tipo Consulta: </label><br>
+                              <select class="form-control" id="cmbTipoConsulta">
+                                  <option value="">Seleccione</option>
+                                  <option value="1">Visita</option>
+                                  <option value="2">Busqueda</option>
+                                  <option value="3">lenguaConsulta genral</option>
+                                  
+                              </select>
+                                                           
+                          </div>
+                          <div class="form-group">
+                            <label>Fecha: </label><br>
+                            <input type="date" id="txtfecha" name="fecha">
+                        </div>
+                          <br>
+                          <input type="button" value="Ingresar" class="btn btn-primary" id="btnAceptar" onclick="validarForm()" />                
+                       
+      
+      
+                   </form>
+                  </div>
+          
+                 <div class="col-3"></div>
+              </div>     
+          </div>
+          
+          <script>
+              document.getElementById('divAlerta').style.display = 'none';
+              document.getElementById('divMostrarDatosCargados').style.display = 'none'
+              
+          </script>
+          <script>
+              function validarForm(){
+                let txtNombre=document.getElementById ("txtNombre").value;
+                  let txtTelefono = document.getElementById('txtTelefono').value;
+                 
+                  let cmbTipoConsulta = document.getElementById('cmbTipoConsulta');
+                  let txtfecha = document.getElementById('txtfecha').value;
+                  let mensaje = "";
+                  let mensajeCorrecto = "";
+      
+                  if(txtNombre =="" )
+                      {
+                       mensaje += '<li>Ingrese un Nombre </li>'; 
+                      }
+                      else
+                        {
+                          mensajeCorrecto +='<li>Muchas gracias,</li>'+txtNombre;
+                        }
+                  
+                        if(isNaN(txtTelefono)|| (txtTelefono ==""))
+                      {
+                       mensaje += '<li>Ingrese valor numerico en el campo telefono </li>'; 
+                      }
+                      else
+                        {
+                          mensajeCorrecto +='<li>lo llamaremos al</li>'+txtTelefono;
+                        }
+      
+                      if(cmbTipoConsulta == 1)
+                 {
+                    mensajeCorrecto +='<li>visito esta página</li>'+txtfecha;
+                 }
+      
+                     if(mensaje != "")
+                  {
+                      document.getElementById('divAlerta').innerHTML = "<ul>" + mensaje + "</ul><button type='button' class='close' data-dismiss='alert' aria-label='Close' id='btnCerrar'  onclick='cerrarAlerta()'><span aria-hidden='true'>×</span></button>";
+                      document.getElementById('divAlerta').style.display = 'block'
+                      
+      
+                  }
+                  else
+                   
+                  if ((txtNombre != "")  && (isNaN(txtTelefono)|| (txtTelefono !="") ) && ( txtfecha))
+                    {
+      
+                    
+                      document.getElementById('divAlerta').style.display = 'none';  
+                      document.getElementById('divMostrarDatosCargados').innerHTML = "<ul>" + mensajeCorrecto + " "+ "</ul><button type='button' class='close' data-dismiss='alert' aria-label='Close' id='btnCerrarM'  onclick='cerrarAlertaMostrarDatosCorrectos()'><span aria-hidden='true'>×</span></button>";
+                      document.getElementById('divMostrarDatosCargados').style.display = 'block'
+                    
+                    }
+                    else
+                     {
+      
+                      document.getElementById('divAlerta').innerHTML = "<ul>" + mensaje + "</ul><button type='button' class='close' data-dismiss='alert' aria-label='Close' id='btnCerrar'  onclick='cerrarAlerta()'><span aria-hidden='true'>×</span></button>";
+                      document.getElementById('divAlerta').style.display = 'block'
+      
+                     }
+                      
+      
+      
+      
+              }
+              function cerrarAlerta()
+              {
+                  document.getElementById('divAlerta').style.display = 'none';
+              }
+            
+              function cerrarAlertaMostrarDatosCorrectos()
+              {
+                  document.getElementById('divMostrarDatosCargados').style.display = 'none';
+              }
+          </script>
+      
+      <br>          
+  
+      <a class="btn btn-success" href="C:\Users\Usuario\Desktop\Rec1erParcial\Inicio.html" role="button" target="_blank">Inicio</a>
+      <br>
+      <br>
+      <a class="btn btn-success" href="C:\Users\Usuario\Desktop\Rec1erParcial\Galeria.html" role="button" target="_blank">Galeria</a> 
+
+</body>
+</html>
